@@ -129,8 +129,10 @@ class PaymentRepository {
     };
 
     final dynamic response = await webClient.post(
-        '${credentials.url}/payments/${entity.id}/upload', credentials.token,
-        data: fields, multipartFiles: multipartFiles);
+        '${credentials.url}/payments/${entity.id}/upload_document',
+        credentials.token,
+        json.encode(fields),
+        rawResponse: true);
 
     final PaymentItemResponse paymentItemResponse =
         serializers.deserializeWith(PaymentItemResponse.serializer, response)!;

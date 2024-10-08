@@ -665,13 +665,11 @@ class _$ActivityEntitySerializer
             specifiedType: const FullType(String)));
     }
     value = object.history;
-    if (value != null) {
-      result
-        ..add('history')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(InvoiceHistoryEntity)));
-    }
-    return result;
+    result
+      ..add('history')
+      ..add(serializers.serialize(value,
+          specifiedType: const FullType(InvoiceHistoryEntity)));
+      return result;
   }
 
   @override

@@ -67,20 +67,17 @@ class FileStorage {
       */
 
       final prefs = await SharedPreferences.getInstance();
-      String? value = prefs.getString(tag);
+      final String? value = prefs.getString(tag);
 
-      if (value != null) {
-        return value;
-      }
+      return value;
 
-      value = prefs.getString(tag + GZIP_TAG);
+      // value = prefs.getString(tag + GZIP_TAG);
 
-      if (value != null) {
-        final decoded = base64Decode(value);
-        final unzipped = GZipDecoder().decodeBytes(decoded);
-        return utf8.decode(unzipped);
-      }
-    } else {
+      // final decoded = base64Decode(value!);
+      // final unzipped = GZipDecoder().decodeBytes(decoded);
+      // return utf8.decode(unzipped);
+
+        } else {
       final file = await _getLocalFile();
       final contents = await file.readAsString();
 

@@ -435,7 +435,7 @@ class InvoiceNinjaAppState extends State<InvoiceNinjaApp> {
                           colorScheme: ColorScheme.dark().copyWith(
                             secondary: accentColor,
                             primary: accentColor,
-                            background: Colors.black,
+                            surface: Colors.black,
                           ),
                           bottomAppBarTheme:
                               BottomAppBarTheme(color: const Color(0xFF1B1C1E)),
@@ -489,7 +489,7 @@ class InvoiceNinjaAppState extends State<InvoiceNinjaApp> {
                               style: outlinedButtonTheme),
                           colorScheme: ColorScheme.fromSwatch().copyWith(
                             secondary: accentColor,
-                            background: Colors.white,
+                            surface: Colors.white,
                           ),
                           bottomAppBarTheme:
                               BottomAppBarTheme(color: Colors.white),

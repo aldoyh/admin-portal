@@ -297,16 +297,14 @@ class _$SettingsEntitySerializer
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
     value = object.translations;
-    if (value != null) {
-      result
-        ..add('translations')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltMap, const [
-              const FullType.nullable(String),
-              const FullType(String)
-            ])));
-    }
-    value = object.taskNumberPattern;
+    result
+      ..add('translations')
+      ..add(serializers.serialize(value,
+          specifiedType: const FullType(BuiltMap, const [
+            const FullType.nullable(String),
+            const FullType(String)
+          ])));
+      value = object.taskNumberPattern;
     if (value != null) {
       result
         ..add('task_number_pattern')
@@ -644,16 +642,14 @@ class _$SettingsEntitySerializer
             specifiedType: const FullType(String)));
     }
     value = object.pdfVariables;
-    if (value != null) {
-      result
-        ..add('pdf_variables')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltMap, const [
-              const FullType(String),
-              const FullType(BuiltList, const [const FullType(String)])
-            ])));
-    }
-    value = object.emailSignature;
+    result
+      ..add('pdf_variables')
+      ..add(serializers.serialize(value,
+          specifiedType: const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType(BuiltList, const [const FullType(String)])
+          ])));
+      value = object.emailSignature;
     if (value != null) {
       result
         ..add('email_signature')

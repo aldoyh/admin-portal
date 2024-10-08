@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 // Project imports:
-import 'package:invoiceninja_flutter/.env.dart';
+// import 'package:invoiceninja_flutter/.env.dart';
 import 'package:invoiceninja_flutter/constants.dart';
 import 'package:invoiceninja_flutter/data/mock/mock_login.dart';
 import 'package:invoiceninja_flutter/data/models/entities.dart';
@@ -16,6 +16,8 @@ import 'package:invoiceninja_flutter/redux/app/app_state.dart';
 import 'package:invoiceninja_flutter/utils/formatting.dart';
 import 'package:invoiceninja_flutter/utils/platforms.dart';
 import 'package:invoiceninja_flutter/utils/serialization.dart';
+
+// import '../../redux/client/client_selectors.dart';
 
 class AuthRepository {
   const AuthRepository({
@@ -43,11 +45,11 @@ class AuthRepository {
     if ((url ?? '').isEmpty) {
       url = Constants.hostedApiUrl;
     }
-
     return sendRequest(
         url: formatApiUrl(url) + '/signup?rc=$referralCode',
         data: credentials,
-        secret: secret);
+        secret: secret,
+        settings: []);
   }
 
   Future<LoginResponse> oauthSignUp({
@@ -72,9 +74,10 @@ class AuthRepository {
     };
 
     return sendRequest(
-        url: formatApiUrl(url) + '/oauth_login?create=true&rc=$referralCode',
-        data: credentials,
-        secret: Config.API_SECRET);
+      url: formatApiUrl(url) + '/oauth_login?create=true&rc=$referralCode',
+      data: credentials,
+      settings: [],
+    );
   }
 
   Future<LoginResponse> login(
@@ -92,17 +95,61 @@ class AuthRepository {
 
     url = formatApiUrl(url) + '/login';
 
-    return sendRequest(url: url, data: credentials, secret: secret);
+    return sendRequest(
+        url: url, data: credentials, secret: secret, settings: []);
   }
 
   Future<dynamic> logout({required Credentials credentials}) async {
     return webClient.post(
       '${credentials.url}/logout',
-      credentials.token,
+  Future<LoginResponse> oauthLogin({
+    required String? idToken,
+    required String? accessToken,
+    required String url,
+    required String secret,
+    required String platform,
+    required String provider,
+    required String? email,
+    required String? authCode,
+  }) async {
+    final credentials = {
+      'id_token': idToken,
+      'provider': provider,
+      'access_token': accessToken,
+      'email': email,
+      'auth_code': authCode,
+    };
+
+    url = formatApiUrl(url) + '/oauth_login';
+
+    return await sendRequest(
+      url: url,
+      data: credentials,
+      secret: secret,
+      settings: [],
     );
   }
+    required String secret,
+    required String platform,
+    required String provider,
+    required String? userEmail,
+    required String? authCode,
+  }) async {
+    final credentials = {
+      'id_token': idToken,
+      'provider': provider,
+      'access_token': accessToken,
+      'email': userEmail,
+      'auth_code': authCode,
+    };
+      'access_token': accessToken,
+      'email': email,
+      'auth_code': authCode,
+    };
+    url = formatApiUrl(url) + '/oauth_login';
 
-  Future<LoginResponse> oauthLogin({
+    return sendRequest(
+        url: url, data: credentials, secret: secret, settings: []);
     required String? idToken,
     required String? accessToken,
     required String url,
@@ -121,7 +168,8 @@ class AuthRepository {
     };
     url = formatApiUrl(url) + '/oauth_login';
 
-    return sendRequest(url: url, data: credentials, secret: secret);
+    return sendRequest(
+        url: url, data: credentials, secret: secret, settings: []);
   }
 
   Future<LoginResponse> refresh({
@@ -146,7 +194,8 @@ class AuthRepository {
       includeStatic = true;
     }
 
-    return sendRequest(url: url, token: token, includeStatic: includeStatic);
+    return sendRequest(
+        url: url, token: token, includeStatic: includeStatic, settings: []);
   }
 
   Future<LoginResponse> recoverPassword(
@@ -156,7 +205,7 @@ class AuthRepository {
     };
     url = formatApiUrl(url) + '/reset_password';
 
-    return sendRequest(url: url, data: credentials);
+    return sendRequest(url: url, data: credentials, settings: []);
   }
 
   Future<void> setDefaultCompany({
@@ -223,6 +272,7 @@ class AuthRepository {
     String? token,
     String? secret,
     bool includeStatic = true,
+    required dynamic settings,
   }) async {
     if (url.contains('?')) {
       url += '&';
@@ -238,7 +288,7 @@ class AuthRepository {
 
     dynamic response;
 
-    if (Config.DEMO_MODE) {
+    if (settings.isDemoMode) {
       response = json.decode(kMockLogin);
     } else {
       response = await webClient.post(url, token ?? '',

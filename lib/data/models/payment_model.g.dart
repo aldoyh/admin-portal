@@ -252,34 +252,26 @@ class _$PaymentEntitySerializer implements StructuredSerializer<PaymentEntity> {
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
     value = object.isChanged;
-    if (value != null) {
-      result
-        ..add('isChanged')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
-    value = object.isDeleted;
-    if (value != null) {
-      result
-        ..add('is_deleted')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
-    value = object.createdUserId;
-    if (value != null) {
-      result
-        ..add('user_id')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.assignedUserId;
-    if (value != null) {
-      result
-        ..add('assigned_user_id')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    return result;
+    result
+      ..add('isChanged')
+      ..add(
+          serializers.serialize(value, specifiedType: const FullType(bool)));
+      value = object.isDeleted;
+    result
+      ..add('is_deleted')
+      ..add(
+          serializers.serialize(value, specifiedType: const FullType(bool)));
+      value = object.createdUserId;
+    result
+      ..add('user_id')
+      ..add(serializers.serialize(value,
+          specifiedType: const FullType(String)));
+      value = object.assignedUserId;
+    result
+      ..add('assigned_user_id')
+      ..add(serializers.serialize(value,
+          specifiedType: const FullType(String)));
+      return result;
   }
 
   @override

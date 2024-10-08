@@ -7,7 +7,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
 // Project imports:
-import 'package:invoiceninja_flutter/.env.dart';
+// import 'package:invoiceninja_flutter/.env.dart';
 import 'package:invoiceninja_flutter/constants.dart';
 import 'package:invoiceninja_flutter/data/models/account_model.dart';
 import 'package:invoiceninja_flutter/data/models/company_gateway_model.dart';
@@ -1173,9 +1173,9 @@ abstract class UserCompanyEntity
       return false;
     }
 
-    if (Config.DEMO_MODE) {
-      return true;
-    }
+    // if (settings.isDemoMode) {
+    //   return true;
+    // }
 
     if (isAdmin) {
       return true;

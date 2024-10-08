@@ -13,14 +13,14 @@ class InvoiceStatusColors {
   Map<String, Color?> get colors {
     return {
       kInvoiceStatusDraft: _colorTheme!.colorLightGray,
-      kInvoiceStatusSent: _colorTheme!.colorInfo,
+      kInvoiceStatusSent: _colorTheme?.colorInfo,
       kInvoiceStatusPartial: _colorTheme!.colorPrimary,
-      kInvoiceStatusPaid: _colorTheme!.colorSuccess,
-      kInvoiceStatusPastDue: _colorTheme!.colorDanger,
-      kInvoiceStatusCancelled: _colorTheme!.colorDarkGray,
-      kInvoiceStatusReversed: _colorTheme!.colorDarkGray,
-      kInvoiceStatusViewed: _colorTheme!.colorWarning,
-      kInvoiceStatusBounced: _colorTheme!.colorDanger,
+      kInvoiceStatusPaid: _colorTheme?.colorSuccess,
+      kInvoiceStatusPastDue: _colorTheme?.colorDanger,
+      kInvoiceStatusCancelled: _colorTheme?.colorDarkGray,
+      kInvoiceStatusReversed: _colorTheme?.colorDarkGray,
+      kInvoiceStatusViewed: _colorTheme?.colorWarning,
+      kInvoiceStatusBounced: _colorTheme?.colorDanger,
     };
   }
 }
@@ -33,10 +33,10 @@ class RecurringInvoiceStatusColors {
   Map<String, Color?> get colors {
     return {
       kRecurringInvoiceStatusDraft: _colorTheme!.colorLightGray,
-      kRecurringInvoiceStatusActive: _colorTheme!.colorSuccess,
-      kRecurringInvoiceStatusPaused: _colorTheme!.colorDarkGray,
-      kRecurringInvoiceStatusCompleted: _colorTheme!.colorInfo,
-      kRecurringInvoiceStatusPending: _colorTheme!.colorPrimary,
+      kRecurringInvoiceStatusActive: _colorTheme?.colorSuccess,
+      kRecurringInvoiceStatusPaused: _colorTheme?.colorDarkGray,
+      kRecurringInvoiceStatusCompleted: _colorTheme?.colorInfo,
+      kRecurringInvoiceStatusPending: _colorTheme?.colorPrimary,
     };
   }
 }

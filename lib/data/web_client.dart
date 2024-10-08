@@ -15,7 +15,7 @@ import 'package:invoiceninja_flutter/utils/platforms.dart';
 import 'package:version/version.dart';
 
 // Project imports:
-import 'package:invoiceninja_flutter/.env.dart';
+// import 'package:invoiceninja_flutter/.env.dart';
 import 'package:invoiceninja_flutter/constants.dart';
 import 'package:invoiceninja_flutter/utils/formatting.dart';
 import 'package:invoiceninja_flutter/utils/strings.dart';
@@ -28,9 +28,9 @@ class WebClient {
     String? token, {
     bool rawResponse = false,
   }) async {
-    if (Config.DEMO_MODE) {
-      throw 'Server requests are not supported in the demo';
-    }
+    // if (Config.DEMO_MODE) {
+    //   throw 'Server requests are not supported in the demo';
+    // }
 
     if (!url.contains('?')) {
       url += '?';
@@ -66,7 +66,8 @@ class WebClient {
 
   Future<dynamic> post(
     String url,
-    String? token, {
+    String? token,
+    dynamic configuration, {
     dynamic data,
     List<MultipartFile>? multipartFiles,
     String? secret,
@@ -81,7 +82,7 @@ class WebClient {
     }
 
     print('POST: $url');
-    if (!kReleaseMode && Config.DEBUG_REQUESTS) {
+    if (!kReleaseMode && configuration.isDebugMode) {
       printWrapped('Data: $data');
     }
     http.Response response;
@@ -139,7 +140,7 @@ class WebClient {
     }
 
     print('PUT: $url');
-    if (!kReleaseMode && Config.DEBUG_REQUESTS) {
+    if (!kReleaseMode && configuration.isDebugMode) {
       printWrapped('Data: $data');
     }
     http.Response response;
@@ -331,4 +332,22 @@ class WebClient {
     return await http.Response.fromStream(await request.send())
         .timeout(const Duration(minutes: 10));
   }
+}
+
+mixin Configuration {
+  bool get isDebugMode;
+  bool get isDemoMode;
+  bool get isTesting;
+
+  String get apiUrl;
+  String get apiSecret;
+  String get url;
+  String get token;
+  String get secret;
+  String get password;
+
+  bool get isSelfHosted;
+
+
+
 }
